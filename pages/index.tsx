@@ -28,9 +28,6 @@ export default function Home() {
   useEffect(() => {
     setCurrentPage(1);
     setItems(data?.slice(0, itemsPerPage) || []);
-    setCheckedItems(
-      data?.filter((item) => item.completed).map((item) => item.id) || []
-    );
   }, [searchTerm, data]);
 
   const handleCheckboxChange = (id: number) => {
@@ -104,14 +101,14 @@ export default function Home() {
             <div key={item.id} className="flex items-center">
               <input
                 type="checkbox"
-                checked={checkedItems.includes(item.id) || item.completed}
+                checked={checkedItems.includes(item.id)}
                 onChange={() => handleCheckboxChange(item.id)}
                 className="w-6 h-6 mr-2 ml-4"
               />
               <li className="bg-color4 text-black rounded-sm mr-4 py-2 px-4 flex-grow">
                 <span
                   className={
-                    item.completed || checkedItems.includes(item.id)
+                    checkedItems.includes(item.id)
                       ? "line-through text-gray-500"
                       : ""
                   }
